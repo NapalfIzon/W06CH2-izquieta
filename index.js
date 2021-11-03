@@ -1,5 +1,6 @@
 require("dotenv").config();
 const http = require("http");
+const { htmlResults } = require("./htmlCode");
 
 const server = http.createServer();
 
@@ -11,6 +12,6 @@ server.listen(port, () => {
 
 server.on("request", (request, response) => {
   response.setHeader("Content-Type", "text/html");
-  response.write("<h1>Ya se Kung Fu!!!</h1>");
+  response.write(htmlResults(1, 2, 3, 4, 5, 6));
   response.end();
 });
