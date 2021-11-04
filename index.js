@@ -1,6 +1,7 @@
 require("dotenv").config();
 const http = require("http");
 const url = require("url");
+const program = require("commander");
 const { htmlResults, htmlError } = require("./htmlCode");
 const {
   sumatory,
@@ -11,10 +12,19 @@ const {
 
 let finalHtml;
 let status;
+let port;
 
 const server = http.createServer();
 
-const port = process.env.SERVER_LOCAL_PORT || 8000;
+program.option("-p, --port <port>");
+program.parse(process.argv);
+const [consolePort] = process.argv.slice(3);
+
+if (consolePort === undefined) {
+  port = process.env.SERVER_LOCAL_PORT || 8000;
+} else {
+  port = consolePort;
+}
 
 server.listen(port);
 
